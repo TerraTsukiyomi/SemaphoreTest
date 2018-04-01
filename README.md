@@ -13,6 +13,7 @@ Observe the above output carefully, you will see that there are maximum 4 people
 
 
 
+
 # Output
 Total available Semaphore permits : 4
 A : acquiring lock...
@@ -79,5 +80,6 @@ A : releasing lock...
 A : available Semaphore permits now: 3
 E : releasing lock...
 E : available Semaphore permits now: 4
+
 
 
