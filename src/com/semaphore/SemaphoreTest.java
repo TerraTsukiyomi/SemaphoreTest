@@ -11,7 +11,7 @@ public class SemaphoreTest {
 
         String name = "";
 
-        MyATMThread(String name) { // к которому имеет доступ один человек
+        MyATMThread(String name) { // к которому имеет доступ человек
             this.name = name;
         }
 
