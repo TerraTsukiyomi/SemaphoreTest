@@ -4,14 +4,14 @@ import java.util.concurrent.Semaphore;
 
 public class SemaphoreTest {
 
-    // max 4 people
+    // максимально могут иметь доступ 4 человека
     static Semaphore semaphore = new Semaphore(4); //Ограничиваем доступ только 4-ьом патокам
 
-    static class MyATMThread extends Thread { // Добваляем класс банкомата
+    static class auctionThread extends Thread { // Добваляем класс банкомата
 
         String name = "";
 
-        MyATMThread(String name) { // к которому имеет доступ человек
+        auctionThread(String name) { // опредедяем имя потоков
             this.name = name;
         }
 
@@ -19,19 +19,19 @@ public class SemaphoreTest {
 
             try {
 
-                System.out.println(name + " : acquiring lock...");
-                System.out.println(name + " : available Semaphore permits now: "
+                System.out.println(name + " : фиксация блокировки");
+                System.out.println(name + " : доступный Семафор может разрешить сейчас дуступ: "
                         + semaphore.availablePermits());
 
                 semaphore.acquire();
-                System.out.println(name + " : got the permit!");
+                System.out.println(name + " : получил разрешение!");
 
                 try {
 
                     for (int i = 1; i <= 5; i++) {
 
-                        System.out.println(name + " : is performing operation " + i
-                                + ", available Semaphore permits : "
+                        System.out.println(name + " : выполняет операцию " + i
+                                + ", доступный Семафор может разрешить сейчас дуступ: "
                                 + semaphore.availablePermits());
 
                         // sleep 1 second
@@ -41,10 +41,10 @@ public class SemaphoreTest {
 
                 } finally {
 
-                    // calling release() after a successful acquire()
-                    System.out.println(name + " : releasing lock...");
+                    // функция release() вызывается после успешно выполеной ф-и acquire()
+                    System.out.println(name + " : освободил доступ.");
                     semaphore.release();
-                    System.out.println(name + " : available Semaphore permits now: "
+                    System.out.println(name + " : сейчас свободных доступов: "
                             + semaphore.availablePermits());
 
                 }
@@ -61,25 +61,25 @@ public class SemaphoreTest {
 
     public static void main(String[] args) {
 
-        System.out.println("Total available Semaphore permits : "
+        System.out.println("Всего свободных доступов: "
                 + semaphore.availablePermits());
 
-        MyATMThread t1 = new MyATMThread("A");
+        auctionThread t1 = new auctionThread("A");
         t1.start();
 
-        MyATMThread t2 = new MyATMThread("B");
+        auctionThread t2 = new auctionThread("B");
         t2.start();
 
-        MyATMThread t3 = new MyATMThread("C");
+        auctionThread t3 = new auctionThread("C");
         t3.start();
 
-        MyATMThread t4 = new MyATMThread("D");
+        auctionThread t4 = new auctionThread("D");
         t4.start();
 
-        MyATMThread t5 = new MyATMThread("E");
+        auctionThread t5 = new auctionThread("E");
         t5.start();
 
-        MyATMThread t6 = new MyATMThread("F");
+        auctionThread t6 = new auctionThread("F");
         t6.start();
 
     }
