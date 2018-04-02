@@ -7,7 +7,7 @@ public class SemaphoreTest {
     // максимально могут иметь доступ 4 человека
     static Semaphore semaphore = new Semaphore(4); //Ограничиваем доступ только 4-ьом патокам
 
-    static class auctionThread extends Thread { // Добваляем класс банкомата
+    static class auctionThread extends Thread {
 
         String name = "";
 
@@ -20,10 +20,10 @@ public class SemaphoreTest {
             try {
 
                 System.out.println(name + " : фиксация блокировки");
-                System.out.println(name + " : доступный Семафор может разрешить сейчас дуступ: "
+                System.out.println(name + " : сейчас свободных доступов: "
                         + semaphore.availablePermits());
 
-                semaphore.acquire();
+                semaphore.acquire(); // даёт разрешение
                 System.out.println(name + " : получил разрешение!");
 
                 try {
@@ -34,8 +34,8 @@ public class SemaphoreTest {
                                 + ", доступный Семафор может разрешить сейчас дуступ: "
                                 + semaphore.availablePermits());
 
-                        // sleep 1 second
-                        Thread.sleep(1000);
+                        // sleep 3 second
+                        Thread.sleep(3000);
 
                     }
 
@@ -43,7 +43,7 @@ public class SemaphoreTest {
 
                     // функция release() вызывается после успешно выполеной ф-и acquire()
                     System.out.println(name + " : освободил доступ.");
-                    semaphore.release();
+                    semaphore.release(); //освобождает доступ к ресурсу
                     System.out.println(name + " : сейчас свободных доступов: "
                             + semaphore.availablePermits());
 
@@ -64,22 +64,22 @@ public class SemaphoreTest {
         System.out.println("Всего свободных доступов: "
                 + semaphore.availablePermits());
 
-        auctionThread t1 = new auctionThread("A");
+        auctionThread t1 = new auctionThread("Гость 1");
         t1.start();
 
-        auctionThread t2 = new auctionThread("B");
+        auctionThread t2 = new auctionThread("Гость 2");
         t2.start();
 
-        auctionThread t3 = new auctionThread("C");
+        auctionThread t3 = new auctionThread("Гость 3");
         t3.start();
 
-        auctionThread t4 = new auctionThread("D");
+        auctionThread t4 = new auctionThread("Гость 4");
         t4.start();
 
-        auctionThread t5 = new auctionThread("E");
+        auctionThread t5 = new auctionThread("Гость 5");
         t5.start();
 
-        auctionThread t6 = new auctionThread("F");
+        auctionThread t6 = new auctionThread("Гость 6");
         t6.start();
 
     }
