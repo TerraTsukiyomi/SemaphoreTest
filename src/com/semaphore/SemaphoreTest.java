@@ -19,7 +19,6 @@ public class SemaphoreTest {
 
             try {
 
-
                 System.out.println(name + " : acquiring lock...");
                 System.out.println(name + " : available Semaphore permits now: "
                         + semaphore.availablePermits());
